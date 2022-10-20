@@ -6,7 +6,8 @@ import Layout from '../components/layout';
 
 
 function MyApp({ Component, pageProps }) {
-  return (<>
+  return (
+    <>
       <Head>
         <title>TheKARY</title>
         <meta name="description" content="TheKARY 데모 홈페이지 입니다." />

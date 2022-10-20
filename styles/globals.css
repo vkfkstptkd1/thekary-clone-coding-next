@@ -17,13 +17,14 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
   vertical-align: baseline;
-  font-family: -apple-system, Noto Sans CJK KR, sans-serif; 
+  font-family: -apple-system, Noto Sans KR, sans-serif; 
 
 }
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
@@ -53,6 +54,7 @@ a {
   text-decoration: none;
 }
 
+
 * {
   box-sizing: border-box;
 }
@@ -69,7 +71,7 @@ a {
 
 /*notosans*/
 @font-face {
-  font-family: 'Noto Sans CJK KR';
+  font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 100;
   src: url("/fonts/NotoSansKR-Light.woff2") format('woff2'),
@@ -78,7 +80,7 @@ a {
 }
 
 @font-face {
-  font-family: 'Noto Sans CJK KR';
+  font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: normal;
   src: url("/fonts/NotoSansKR-Regular.woff2") format('woff2'),
@@ -88,7 +90,7 @@ a {
 
 
 @font-face {
-  font-family: 'Noto Sans CJK KR';
+  font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 500;
   src: url("/fonts/NotoSansKR-Medium.woff2") format('woff2'),
@@ -97,7 +99,7 @@ a {
 }
 
 @font-face {
-  font-family: 'Noto Sans CJK KR';
+  font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: bold;
   src: url("/fonts/NotoSansKR-Bold.woff2") format('woff2'),
@@ -110,3 +112,13 @@ a {
   line-height: 30px;
 }
 
+
+
+container{
+    min-height: 500px;
+    height: auto !important;
+    margin: 20px 0;
+    height: 500px;
+    width: 100%;
+    zoom: 1.1;
+}

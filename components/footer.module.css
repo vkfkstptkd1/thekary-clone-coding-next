@@ -33,7 +33,7 @@
     .foot_list .info {width: 218px;}
 
 	.bottom_logo{float: left;width: 20%;}
-	.foot_list{ display:flex; right: 50px;left:50px;position: relative; float: right; width: 79%;}
+	.foot_list{ right: 50px;left:50px;position: relative; float: right; width: 79%;}
 
 }
 @media screen and (max-width:900px){
