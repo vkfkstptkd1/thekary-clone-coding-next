@@ -1,0 +1,56 @@
+
+.footer{border-top: 1px solid #e6e6e6;position: relative;min-width: 1500px;z-index: 1;height: 260px;}
+.footer p, .footer a {color: #555;font-size: 12.5px;}
+.footer_wrap{padding: 47px 0 52px;overflow: hidden;}
+.bottom_logo{position: absolute;left: 100px;}
+.bottom_logo img{width: 160px;}
+.float{float: left;}
+.cs{width: 200px;}
+.foot_list .cs li:first-child{padding:0;}
+.foot_list .cs li { padding:1.7px 0 }
+.foot_list .cs li a { letter-spacing: 1.2px }
+.commu{width: 224px;}
+.commu ul li{padding: 4px 0;position: relative;}
+.commu ul li:first-child{padding:0;}
+/*
+.commu ul li::after{    transition: .2s ease-in;content: "";display: block;position: absolute;width: -0px;height: -0px;border-radius: 50%; background-color:#ED4125;left: -12px;top: 50%;transform: translateY(-50%);}
+.commu ul li:hover::after{height: 5px;width: 5px;}
+*/
+.commu ul li:hover{text-decoration: underline;}
+.cs ul li:hover{text-decoration: underline;}
+.foot_list{padding-bottom: 47px; overflow:hidden;position: absolute;right: 100px;font: 0.75em 'Open Sans','Apercu Pro','Noto Sans KR','Malgun Gothic','Nanum Gothic',Verdana,Dotum,AppleGothic,sans-serif;}
+.foot_list .info{width: 319px;    line-height: 19px;}
+.footer .foot_list .tit{margin-bottom: 17px;font-size: 15px;color: #0a0a0a ;line-height: 1;font-weight: bold;}
+.foot_list .cs_num{font-size: 13px;color: #555;line-height: 1;display: block;margin-bottom: 6px;}
+.foot_list .sche{line-height: 1.7;font-size: 12px;color: #555;text-decoration: none;border: none;}
+.copyright { font-size: 11px; position: absolute;right:20px; bottom:20px}
+
+@media screen and (max-width:1500px){
+    .footer{min-width:0;height: 350px;}
+    .bottom_logo{position:relative;left: 50px;}
+    .cs {width: 15%;}
+    .commu {width: 15%;}
+    .foot_list .info {width: 218px;}
+
+	.bottom_logo{float: left;width: 20%;}
+	.foot_list{ display:flex; right: 50px;left:50px;position: relative; float: right; width: 79%;}
+
+}
+@media screen and (max-width:900px){
+    /*#footer{min-width: 760px;}*/
+	.foot_list{left: 50px;padding-top: 50px;}
+}
+@media screen and (max-width:600px){
+    .footer{min-width:auto;height: 560px;}
+.footer_wrap{padding: 47px 20px 52px;}
+.float{float: left; width: 32%;}
+.bottom_logo{position: static;float: unset;}
+.foot_list{position: static;padding-bottom: 0px;padding-top: 0px;width: 100%;}
+.footer .foot_list .tit{margin-bottom: 10px;margin-top: 20px; font-size: 13px;}
+.foot_list .cs_num{font-size: 14px;}
+.foot_list .sche{font-size:11px ;}
+.commu ul li p{font-size: 11px;}
+.info ul li p{font-size: 11px;}
+	 .foot_list .info {width: 100%;}
+	 .footer p, .footer a{    font-size: 11px;}
+}
