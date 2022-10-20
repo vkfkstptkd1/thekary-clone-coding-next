@@ -10,7 +10,7 @@ export default function Brand({props}){
                 <ul>
                     <li>홈&nbsp;<span><i className={`${styles.fas} ${styles["fa-angle-right"]}`}></i></span></li>
                     <li>COMPANY&nbsp;<span><i className={`${styles.fas} ${styles["fa-angle-right"]}`}></i></span></li>
-                    <li className={styles.loca}>{props.title}캐리마켓</li>
+                    <li className={styles.loca}>캐리마켓</li>
                 </ul>
             </div>
 
@@ -84,13 +84,26 @@ export async function getStaticPaths() {
   }
   
   // `getStaticPaths` requires using `getStaticProps`
-  export async function getStaticProps(params) {
+  export async function getStaticProps(context) {
+    try {
+        const res = await fetch(`http://10.82.22.96:8080/brand?name=karymarket`)
     
-    console.log(params);
-    const apiUrl = `http://10.82.22.96:8080/brand?name=karymarket`;
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-    console.log(params.name);
+        const { data } = await res.json();
+        return {
+          props: { title: data },
+        }
+      }
+      catch (e) {
+        console.error({ e })
+        return {
+          props: { notes: [] }
+        }
+      }
+    // console.log(context);
+    // const apiUrl = `http://10.82.22.96:8080/brand?name=karymarket`;
+    // const res = await fetch(apiUrl);
+    // const data = await res.json();
+    // console.log(params.name);
 
     return {
         props: {
