@@ -1,7 +1,6 @@
 import Header from '../components/header';
 import '../styles/globals.css';
 import Head from 'next/head';
-import "bootstrap/dist/css/bootstrap.min.css"
 
 import Footer from '../components/footer';
 import Layout from '../components/layout';

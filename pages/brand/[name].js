@@ -1,9 +1,28 @@
 import styles from '../router.module.css'
+import { useState,useEffect } from 'react';
 
-
-export default function Brand({props}){
+export default function Brand({params}){
     
+    const [loading,setLoading]=useState(true);
+    const [info,setInfo]=useState([]);
+    useEffect(()=>{
+        console.log("시작")
+        fetch(`http://10.82.22.96:8080/pr?category=karymarket`,{
+        }).then((response) => response.json())//json으로 받아서
+          .then((json)=>{
+              console.log(json)
+              const jsonData=json.data.prs;
+              setInfo(jsonData);
+              setLoading(false);
+        });
+    },[])//이컴포넌트가 최초로 렌더링 될 때 한번만 사용하는 useEffct
 
+    const dataList = info.map((jsondata)=>
+        <tr style={{height:"50px"}} >
+            <th>{jsondata.title}</th>
+            <th>{jsondata.createDate}</th>
+        </tr>
+    )
     return (
         <div>
             <div className={styles.sub_cate}>
