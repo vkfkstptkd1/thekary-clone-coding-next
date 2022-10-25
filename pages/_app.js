@@ -4,10 +4,16 @@ import Head from 'next/head';
 
 import Footer from '../components/footer';
 import Layout from '../components/layout';
-
+import Admin from './admin';
+import Router, { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter()
+  
   return (
+    router.pathname==="/admin" ? 
+    <Admin/>
+    :
     <>
       <Head>
         <title>TheKARY</title>

@@ -1,77 +1,60 @@
-import styles from '../router.module.css'
-import { useState,useEffect } from 'react';
+import styles from '../../styles/router.module.css'
 
-export default function Brand({params}){
-    
-    const [loading,setLoading]=useState(true);
-    const [info,setInfo]=useState([]);
-    useEffect(()=>{
-        console.log("시작")
-        fetch(`http://10.82.22.96:8080/pr?category=karymarket`,{
-        }).then((response) => response.json())//json으로 받아서
-          .then((json)=>{
-              console.log(json)
-              const jsonData=json.data.prs;
-              setInfo(jsonData);
-              setLoading(false);
-        });
-    },[])//이컴포넌트가 최초로 렌더링 될 때 한번만 사용하는 useEffct
 
-    const dataList = info.map((jsondata)=>
-        <tr style={{height:"50px"}} >
-            <th>{jsondata.title}</th>
-            <th>{jsondata.createDate}</th>
-        </tr>
-    )
+export default function Brand(props){
+
+    let content=props.content.split('\n').map(line=>{
+        return (<>{line}<br/></>)
+    })
+
+    let name=props.title.split('｜',1)
+    console.log(name)
+
+
     return (
         <div>
+        
             <div className={styles.sub_cate}>
                 <ul>
-                    <li>홈&nbsp;<span><i className={`${styles.fas} ${styles["fa-angle-right"]}`}></i></span></li>
-                    <li>COMPANY&nbsp;<span><i className={`${styles.fas} ${styles["fa-angle-right"]}`}></i></span></li>
-                    <li className={styles.loca}>캐리마켓</li>
+                    <li>홈 &nbsp;<span><i className={`${styles.fas} ${styles["fa-angle-right"]}`}></i></span></li>
+                    <li>COMPANY &nbsp;<span><i className={`${styles.fas} ${styles["fa-angle-right"]}`}></i></span></li>
+                    <li className={styles.loca}>{name}</li>
                 </ul>
             </div>
 
             <div data-aos="fade-down" data-aos-duration="1000">
             <div className={styles["mis-wrap"]}>
                 <div className={styles["mis_title"]}>
-                    <p>KARY SANTA CLAUS | 캐리 산타와 함께 "매일 크리스마스!"</p>
+                    <p>{props.title}</p>
                     <p></p>
                 </div>
-                <img src="/about_mis.png" alt="" />
+                <img src={props.location} alt="" />
                 <div className={styles.mis_bottom}>
-                <p>KARYMARKET 소개</p>
+                <p>{props.subheading}</p>
                 <span>
-                    캐리마켓(KARYMARKET)은 "모든 아이들은 아티스트입니다"라는 슬로건 아래 만들어진 우리 가족과 아이를 위한 FAMILY LIFE STYLE SHOP입니다.<br/>
-                    우리 아이의 패션과 생활 그리고 유쾌한 감성을 위한 특별한 브랜드와 제품을 소개합니다.<br/>
-                    아이의 감각을 깨워주는 아티스트의 제품, 가족의 건강을 생각하는 건강한 제품, 아이를 위한 아름다운 이야기로 가득차 있는 제품,<br/>
-                    캐리마켓은 우리가족과 아이를 위한 가장 멋진 생각을 합니다.<br/>
-                    백화점 기성 브랜드에 국한되어 있던 기존의 판매방식에서 벗어나 온·오프라인 매장을 함께 운영하며<br/>
-                    새로운 플랫폼으로 2~30대 ‘새로운 엄마‘와 가족들을 만나고자 합니다. <br/>
-                    캐리마켓만의 다양한 방법과 컨텐츠로 재미있고 흥미로운 컬러를 끊임없이 보여드리겠습니다. <br/>
+                    {content}                    
                 </span>
                 </div>
                 <div className={styles.web_btn}>
-                <img src="/theKary_logo.png" alt=""/>
+                <img src={props.logoLocation} alt=""/>
             <div className={styles.btn_wrap}>
                 <p className={styles.web}>
-                    <a href="https://karymarket.com/" target="_blank">
+                    <a href={props.websiteLocation} target="_blank" rel="noopener noreferrer">
                         Website
                     </a>
                 </p>
                 <p className={`${styles.web} ${styles.next}`}>
-                    <a href="https://www.instagram.com/karymarket_/?hl=ko" target="_blank">
+                    <a href={props.instagramLocation} target="_blank" rel="noopener noreferrer">
                         Instagram
                     </a>
                 </p>
                 <p className={styles.download}>
-                    <a href="/download/karymarket_ci.ai" download>
+                    <a href={props.aiFileLocation} download rel="noopener noreferrer">
                         AI 다운로드 <img src="/down_arrow.png" alt=""/>
                     </a>
                 </p>
                 <p className={`${styles.download} ${styles.next}`}>
-                    <a href="/download/karymarket_ci.jpg" download>
+                    <a href={props.jpgFileLocation} download rel="noopener noreferrer">
                         JPG 다운로드 <img src="/down_arrow.png" alt=""/>
                     </a>
                 </p>
@@ -85,59 +68,73 @@ export default function Brand({params}){
 
 export async function getStaticPaths() {
 
-   
-    const apiUrl = `http://10.82.22.96:8080/brand?name=karymarket`;
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-    console.log(data);
-
     return {
       paths: [
-        { params: { name: 'karymarket' } }, 
-        { params: { name: 'bebedepino' } },
-        { params: { name: 'icebiscuit' } },
+        { 
+            params: { name: 'karymarket' } 
+        }, 
+        { 
+            params: { name: 'bebedepino' } 
+        },
+        {   params: { name: 'icebiscuit' } },
+
         { params: { name: 'nununu' } }
     ],
-      fallback: false, // can also be true or 'blocking'
+      fallback: true, // can also be true or 'blocking'
     }
   }
   
   // `getStaticPaths` requires using `getStaticProps`
   export async function getStaticProps(context) {
+
     try {
-        const res = await fetch(`http://10.82.22.96:8080/brand?name=karymarket`)
-    
-        const { data } = await res.json();
+      
+        const res = await fetch(`http://10.82.22.96:8080/brand?name=${context.params.name}`)   
+        const data = await res.json()
+        const realdata = data.data
+
         return {
-          props: { title: data },
+            props:
+            { 
+                title: realdata.title,
+                subheading: realdata.subheading,
+                content: realdata.content,
+                location: realdata.location,
+                logoLocation: realdata.logoLocation,
+                websiteLocation: realdata.websiteLocation,
+                instagramLocation: realdata.instagramLocation,
+                aiFileLocation: realdata.aiFileLocation,
+                jpgFileLocation: realdata.jpgFileLocation, 
+            }
+            
         }
       }
       catch (e) {
-        console.error({ e })
+        console.log(params.name)
+        console.error("error 입니다.",{ e })
         return {
-          props: { notes: [] }
-        }
       }
+    }
+}
     // console.log(context);
     // const apiUrl = `http://10.82.22.96:8080/brand?name=karymarket`;
     // const res = await fetch(apiUrl);
     // const data = await res.json();
     // console.log(params.name);
 
-    return {
-        props: {
-            title: 'data.title'
-            // title: data.title,
-            // subheading: data.subheading,
-            // content: data.content,
-            // location: data.location,
-            // logoLocation: data.logoLocation,
-            // websiteLocation: data.websiteLocation,
-            // instagramLocation: data.instagramLocation,
-            // aiFileLocation: data.aiFileLocation,
-            // jpgFileLocation: data.jpgFileLocation,
-        },
-      };
-  }
+    // return {
+    //     props: {
+    //         title: realdata.title,
+    //         subheading: realdata.subheading,
+    //         content: realdata.content,
+    //         location: realdata.location,
+    //         logoLocation: realdata.logoLocation,
+    //         websiteLocation: realdata.websiteLocation,
+    //         instagramLocation: realdata.instagramLocation,
+    //         aiFileLocation: realdata.aiFileLocation,
+    //         jpgFileLocation: realdata.jpgFileLocation,
+    //     },
+    //   };
+  
 
 

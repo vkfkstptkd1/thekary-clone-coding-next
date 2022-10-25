@@ -1,9 +1,12 @@
-import styles from "./header.module.css";
+import styles from '../styles/header.module.css';
 import Link from "next/link";
+import {useRouter} from 'next/router';
 
 
 export default function Header() {
     
+const router = useRouter()
+
     return (
     <header>
         <div className={styles.header}>
@@ -24,7 +27,7 @@ export default function Header() {
                 </h1>
             
                 <div className={styles.gnb}>
-                    <ul className={styles.tabs}>
+                    <ul className={router.pathname === '/' ? styles.tabs : styles.tabss }>
                         <li className={styles.company}><Link href="/company/mission"><a>COMPANY</a></Link></li>
                         <li className={styles.brand}><Link href="/brand/karymarket"><a>BRAND</a></Link><span className={styles.line}></span></li>
                         <li className={styles.csr}><Link href="/csr/social"><a>CSR</a></Link><span className={styles.line}></span></li>

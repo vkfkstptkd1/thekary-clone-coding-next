@@ -1,9 +1,12 @@
 import {useRouter} from 'next/router'
-import styles from '../router.module.css'
-export default function Company(){
-    
-    const router = useRouter()
-    const { name } = router.query
+import styles from '../../styles/router.module.css'
+export default function Company(props){
+    console.log(props)
+
+    let content=props.content.split('\n').map(line=>{
+        return (<>{line}<br/></>)
+    })
+
 
     return (
         <div>
@@ -11,26 +14,19 @@ export default function Company(){
                 <ul>
                     <li>홈&nbsp;<span><i className={`${styles.fas} ${styles["fa-angle-right"]}`}></i></span></li>
                     <li>COMPANY&nbsp;<span><i className={`${styles.fas} ${styles["fa-angle-right"]}`}></i></span></li>
-                    <li className={styles.loca}>미션</li>
+                    <li className={styles.loca}>{props.subheading}</li>
                 </ul>
             </div>
 
             <div data-aos="fade-down" data-aos-duration="1000">
             <div className={styles["mis-wrap"]}>
                 <div className={styles["mis_title"]}>
-                    <p>KARY SANTA CLAUS | 캐리 산타와 함께 "매일 크리스마스!"</p>
+                    <p>{props.title}</p>
                 </div>
-                <img src="/about_mis.png" alt="" />
+                <img src={props.location} alt="" />
                 <div className={styles.mis_bottom}>
-                    <p>미션</p>
-                    <span>
-                        캐럴은 마법같은 힘이 있죠. 우리가 언제, 어디에 있더라도 그 순간을 크리스마스로 만들어 버리는 마법.<br/>
-                        그러나 찰나처럼 지나가 버리는 크리스마스, 매일이 크리스마스라면 얼마나 좋을까요?<br/>
-                        <br/>
-                        더캐리는 가족과 함께하는 따뜻하고 행복한 크리스마스의 기쁨을 매일매일 선사하고 싶어요.<br/>
-                        1년을 손꼽아 기다리는 산타클로스처럼 더캐리만의 특별한 선물을 준비할게요.<br/>
-                        캐리 산타와 함께 만들어 갈 '매일 크리스마스' 즐기러 가보실까요?<br/>
-                    </span>
+                    <p>{props.subheading}</p>
+                    <span>{content}</span>
                     <br /><br />
                 </div>
             </div>
@@ -40,31 +36,43 @@ export default function Company(){
 }
 
 
-// export async function getStaticPaths() {
+export async function getStaticPaths() {
+
+    return {
+      paths: [
+        { 
+            params: { name: 'mission' } 
+        }, 
+        { 
+            params: { name: 'vision' } 
+        },
+    ],
+      fallback: true, // can also be true or 'blocking'
+    }
+  }
+  
+  // `getStaticPaths` requires using `getStaticProps`
+  export async function getStaticProps(context) {
+
+    try {
+      
+        const res = await fetch(`http://10.82.22.96:8080/company?category=${context.params.name}`)   
+        const data = await res.json()
+        const realdata = data.data
+        return {
+            props:
+                { 
+                    title: realdata.title,
+                    subheading: realdata.subheading,
+                    content: realdata.content,
+                    location: realdata.location,
+                }
+                
+            }
+    } catch (e) {
+        console.log(context.params.name)
+        console.error("error 입니다.",{ e })
+        return
+    }
+}
     
-//     const paths = [
-//         { params: 
-//             { name: 'mission'
-//             } 
-//         } // See the "paths" section below
-//       ]
-//     return {
-//       paths,fallback: false
-//     };
-//   }
-
-// export async function getStaticProps({params}) {
-//     // Call an external API endpoint to get posts.
-//     // You can use any data fetching library
-//     const res = await fetch(`http://10.82.22.96:8080/company?category=미션`);
-//     const detail = await res.json();
-//     console.log(detail)
-
-//     // By returning { props: { posts } }, the Blog component
-//     // will receive `posts` as a prop at build time
-//     return {
-//       props: {
-//         detail
-//       },
-//     }
-//   }

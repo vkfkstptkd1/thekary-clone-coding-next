@@ -1,4 +1,4 @@
-import styles from './footer.module.css';
+import styles from '../styles/footer.module.css';
 export default function Footer() {
 
 return (
@@ -39,10 +39,10 @@ return (
                     <div className={`${styles.commu} ${styles.float}`}>
                         <ul>
                             <li><p className={styles.tit}>FAMILY SITE</p></li>
-                            <li><a href="https://karymarket.com/" target="_blank">KARYMARKET</a></li>
-                            <li><a href="https://www.bebedepino.com" target="_blank">BEBEDEPINO</a></li>
-                            <li><a href="http://icebiscuit.com/" target="_blank">ICEBISCUIT</a></li>
-                            <li><a href="http://nununu.co.kr/" target="_blank">nununu</a></li>
+                            <li><a href="https://karymarket.com/" target="_blank" rel="noopener noreferrer">KARYMARKET</a></li>
+                            <li><a href="https://www.bebedepino.com" target="_blank" rel="noopener noreferrer">BEBEDEPINO</a></li>
+                            <li><a href="http://icebiscuit.com/" target="_blank" rel="noopener noreferrer">ICEBISCUIT</a></li>
+                            <li><a href="http://nununu.co.kr/" target="_blank" rel="noopener noreferrer">nununu</a></li>
                         </ul>
                     </div>
                     <div className={`${styles.info} ${styles.float}`}>
