@@ -1,20 +1,13 @@
-import Header from '../components/header';
 import '../styles/globals.css';
 import Head from 'next/head';
-
-import Footer from '../components/footer';
 import Layout from '../components/layout';
-import Admin from './admin';
-import Router, { useRouter } from 'next/router';
-
+import { useRouter } from 'next/router';
+import Admin from './admin/login';
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
   
   return (
-    router.pathname==="/admin" ? 
-    <Admin/>
-    :
-    <>
+   <>
       <Head>
         <title>TheKARY</title>
         <meta name="description" content="TheKARY 데모 홈페이지 입니다." />
@@ -23,7 +16,7 @@ function MyApp({ Component, pageProps }) {
       <Layout>
       <Component {...pageProps} />
       </Layout>
-    </>
+      </>
   )
 }
 
